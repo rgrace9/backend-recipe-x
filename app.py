@@ -46,10 +46,6 @@ class IngredientDietaryRestriction(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), primary_key=True)
     restriction_id = db.Column(db.Integer, db.ForeignKey('dietary_restriction.id'), primary_key=True)
 
-
-# def create_tables():
-#     db.create_all()
-
 with app.app_context():
     print("Creating tables")
     print(os.environ.get('DATABASE_URI'))
