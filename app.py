@@ -27,6 +27,22 @@ class Quotes(Resource):
     }
 }
 
+def extract_title_and_description(api_response_str):
+    # Parse the JSON string to a dictionary
+    message_data = json.loads(api_response_str)
+    
+    # Extract 'title' and 'description' from the parsed data
+    title = message_data.get("title", "")
+    description = message_data.get("description", "")
+    
+    # Return as a dictionary
+    return {"title": title, "description": description}
+
+# Example usage:
+# api_response_str = "{\"title\": \"Banana Chocolate Chip Pancakes\", \"description\": \"Fluffy vegan pancakes studded with chocolate chips, perfect for a delightful morning treat.\"}"
+
+
+
 
 
 def get_chat_message(user_preferences):
@@ -57,7 +73,8 @@ def get_chat_message(user_preferences):
     )
 
     chat_message = response.choices[0].message.content
-    return chat_message
+    result = extract_title_and_description(chat_message)
+    return result
 
 
 @app.route('/recipe-ideas', methods=['POST'])
@@ -73,7 +90,7 @@ def recipe_ideas():
     chat_message = get_chat_message(data_string)
 
     # Return the chat message as JSON
-    return jsonify({"message": chat_message})
+    return jsonify(chat_message)
 
 
 api.add_resource(Quotes, '/')
