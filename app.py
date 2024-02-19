@@ -6,6 +6,8 @@ import git
 import os
 from openai import OpenAI
 import json
+import random
+from flask_sqlalchemy import SQLAlchemy
 
 load_dotenv()
 
@@ -18,6 +20,41 @@ CORS(app)
 
 api = Api(app)
 
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+db = SQLAlchemy(app)
+
+class Ingredient(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), nullable=False)
+    type = db.Column(db.String(50), nullable=False)
+
+class Allergy(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    label = db.Column(db.String(255), nullable=False)
+
+class DietaryRestriction(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    label = db.Column(db.String(255), nullable=False)
+
+class IngredientAllergy(db.Model):
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), primary_key=True)
+    allergy_id = db.Column(db.Integer, db.ForeignKey('allergy.id'), primary_key=True)
+
+class IngredientDietaryRestriction(db.Model):
+    ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), primary_key=True)
+    restriction_id = db.Column(db.Integer, db.ForeignKey('dietary_restriction.id'), primary_key=True)
+
+
+# def create_tables():
+#     db.create_all()
+
+with app.app_context():
+    print("Creating tables")
+    print(os.environ.get('DATABASE_URI'))
+    db.create_all()
+    print("Tables created")
 class Quotes(Resource):
     def get(self):
         return {
@@ -37,6 +74,7 @@ def extract_title_and_description(api_response_str):
     
     # Return as a dictionary
     return {"title": title, "description": description}
+
 
 # Example usage:
 # api_response_str = "{\"title\": \"Banana Chocolate Chip Pancakes\", \"description\": \"Fluffy vegan pancakes studded with chocolate chips, perfect for a delightful morning treat.\"}"
@@ -77,19 +115,34 @@ def get_chat_message(user_preferences):
     return result
 
 
+def generate_random_ingredients_payload(ingredients_array, user_payload):
+    # Randomly select five ingredients
+    random_ingredients = random.sample(ingredients_array, 5)
+    
+    # Prepare payloads for each ingredient
+    payloads = []
+    for ingredient in random_ingredients:
+        payload = user_payload.copy()
+        # Set randomIngredients key dynamically
+        payload["randomIngredients"] = [ingredient]
+        payloads.append(payload)
+    
+    return payloads
+
+
 @app.route('/recipe-ideas', methods=['POST'])
 # @cross_origin(origins=["http://localhost:3000"]) 
 def recipe_ideas():
     # Get the JSON data from the request
     user_preferences = request.get_json()
  
+    # generate_random_ingredients_payload(user_preferences["specificIngredientsToInclude"], user_preferences)
+    # return
     data_string = json.dumps(user_preferences)
 
-    # return
-    # Call the function to get the chat message
+
     chat_message = get_chat_message(data_string)
 
-    # Return the chat message as JSON
     return jsonify(chat_message)
 
 
