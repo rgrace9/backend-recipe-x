@@ -117,9 +117,7 @@ def generate_random_ingredients_payload(ingredients_array, user_payload):
 
 
 @app.route('/recipe-ideas', methods=['POST'])
-# @cross_origin(origins=["http://localhost:3000"]) 
 def recipe_ideas():
-    # Get the JSON data from the request
     user_preferences = request.get_json()
  
     # generate_random_ingredients_payload(user_preferences["specificIngredientsToInclude"], user_preferences)
