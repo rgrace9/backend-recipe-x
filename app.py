@@ -61,22 +61,12 @@ class Quotes(Resource):
 }
 
 def extract_title_and_description(api_response_str):
-    # Parse the JSON string to a dictionary
     message_data = json.loads(api_response_str)
     
-    # Extract 'title' and 'description' from the parsed data
     title = message_data.get("title", "")
     description = message_data.get("description", "")
     
-    # Return as a dictionary
     return {"title": title, "description": description}
-
-
-# Example usage:
-# api_response_str = "{\"title\": \"Banana Chocolate Chip Pancakes\", \"description\": \"Fluffy vegan pancakes studded with chocolate chips, perfect for a delightful morning treat.\"}"
-
-
-
 
 
 def get_chat_message(user_preferences):
