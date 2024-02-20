@@ -8,6 +8,8 @@ from openai import OpenAI
 import json
 import random
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy import text
+from flask_migrate import Migrate
 
 load_dotenv()
 
@@ -24,33 +26,50 @@ app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URI')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 db = SQLAlchemy(app)
+migrate = Migrate(app, db)
+
+class IngredientCategory(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    name = db.Column(db.String(255), unique=True, nullable=False)
+    ingredients = db.relationship('Ingredient', backref='category', lazy=True)
 
 class Ingredient(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(255), nullable=False)
-    type = db.Column(db.String(50), nullable=False)
+    name = db.Column(db.String(255), unique=True, nullable=False)
+    category_id = db.Column(db.Integer, db.ForeignKey('ingredient_category.id'), nullable=False)
 
 class Allergy(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    label = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
 
-class DietaryRestriction(db.Model):
+class Diet(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    label = db.Column(db.String(255), nullable=False)
+    name = db.Column(db.String(255), nullable=False)
 
 class IngredientAllergy(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), primary_key=True)
     allergy_id = db.Column(db.Integer, db.ForeignKey('allergy.id'), primary_key=True)
 
-class IngredientDietaryRestriction(db.Model):
+class IngredientDiet(db.Model):
     ingredient_id = db.Column(db.Integer, db.ForeignKey('ingredient.id'), primary_key=True)
-    restriction_id = db.Column(db.Integer, db.ForeignKey('dietary_restriction.id'), primary_key=True)
+    diet_id = db.Column(db.Integer, db.ForeignKey('diet.id'), primary_key=True)
 
-with app.app_context():
-    print("Creating tables")
-    print(os.environ.get('DATABASE_URI'))
-    db.create_all()
-    print("Tables created")
+
+# with app.app_context():
+    # print("Creating tables")
+    # print(os.environ.get('DATABASE_URI'))
+    # db.create_all()
+    # print("Tables created")
+    
+# @app.cli.command("reset-db")
+# def reset_database():
+#     meta = db.metadata
+#     for table in reversed(meta.sorted_tables):
+#         db.session.execute(text(f"DROP TABLE IF EXISTS {table.name} CASCADE"))
+#     db.session.commit()
+#     db.create_all()
+#     db.session.commit()
+
 class Quotes(Resource):
     def get(self):
         return {
