@@ -1,10 +1,10 @@
 ingredient_system_content =  '''
 Based on the ingredient from the USER return the single ingredient that includes the category ID, the diets, and allergies associated with each ingredient. The diet list is the diets that the ingredient is banned from. The allergies list is the allergies in which the ingredient is banned from. Each ingredient returned should be in this shape:
 ingredient
-     {"name": "All-purpose flour", "category_id": 3, "restricted_diet_ids": [3, 4, 5, 11], "allergy_ids": [7]},
+     {"name": "All-purpose flour", "category_id": 3, "restricted_diet_ids": [3, 4, 5, 11], "allergy_ids": [7]}
 
 As each ingredient is added to the array, include in it the appropriate allergy, category and the restricted diet IDs. An ingredient can only be associated with one category but it can be associated with many diets and allergies. 
-
+Do not include a trailing comma after the ingredient object.
 Here are the categories and their ids
  id |    name
 ----+------------
@@ -59,7 +59,7 @@ These are the diet names and their IDs. Associate the ingredient with the diet i
 For each ingredient it must be associated with one category. It is optional that it is associated with diets and allergies, but if it is, it can be associated with many diets and allergies.
 
 Return only the object and no other text
- {"name": "All-purpose flour", "category_id": 3, "restricted_diet_ids": [3, 4, 5, 11], "allergy_ids": [7]},
+ {"name": "All-purpose flour", "category_id": 3, "restricted_diet_ids": [3, 4, 5, 11], "allergy_ids": [7]}
 
 These are descriptions of each diet
 Vegan: Excludes all animal products, including meat, dairy, eggs, and often honey. It also avoids animal-derived substances.
@@ -96,6 +96,55 @@ Black pepper is NOT a nightshade. Sweet potato is not a nightshade. Mushrooms ar
 Raw Food: Consists of uncooked, unprocessed plant foods. Typically, food is not heated above 118 degrees Fahrenheit to preserve enzymes and nutrients. Excludes animal products, processed foods, and anything cooked above 115 degrees fahrenheit. A dehydrator can be used to cook things.
 
 
+Allergy Descriptions and Example Ingredient Bans:
+1. Peanuts:
+
+Description: A severe allergy to peanuts can trigger a life-threatening reaction called anaphylaxis. Symptoms include hives, swelling, wheezing, trouble breathing, and nausea.
+Banned Ingredients: Peanuts, peanut butter, peanut oil, hydrolyzed peanut protein, lecithin (if derived from peanuts).
+2. Tree Nuts:
+
+Description: This allergy encompasses various nuts like almonds, walnuts, cashews, pecans, hazelnuts, pistachios, and Brazil nuts. Reactions can be similar to peanut allergies, ranging from mild to severe.
+Banned Ingredients: All tree nuts mentioned above, any nut butters or oils derived from them, and "may contain nuts" warnings.
+3. Milk:
+
+Description: Milk allergy involves a reaction to the proteins in cow's milk. Symptoms can include hives, nausea, vomiting, diarrhea, and wheezing.
+Banned Ingredients: Cow's milk, cheese, yogurt, butter, cream, ice cream, whey, casein, lactose, and any products containing these ingredients.
+4. Eggs:
+
+Description: An egg allergy triggers a reaction to egg proteins found in both yolks and whites. Symptoms can range from mild skin reactions to anaphylaxis.
+Banned Ingredients: Eggs, egg whites, egg yolks, ovum, lecithin (if derived from eggs), and any products containing these ingredients.
+5. Fish:
+
+Description: Fish allergy can involve different types of fish or even shellfish. Symptoms can include hives, swelling, wheezing, and anaphylaxis.
+Banned Ingredients: All types of fish mentioned in the allergy (e.g., tuna, salmon, cod), fish oil, fish sauce, isinglass, and any products containing these ingredients.
+6. Shellfish:
+
+Description: Similar to fish allergies, reactions can occur to shrimp, crab, lobster, oysters, and other shellfish. Symptoms can range from mild to severe, including anaphylaxis.
+Banned Ingredients: All types of shellfish mentioned in the allergy, shellfish broth, and any products containing these ingredients.
+7. Wheat:
+
+Description: Wheat allergy involves a reaction to gluten, a protein found in wheat, barley, and rye. Symptoms can include digestive issues, skin reactions, and anaphylaxis in severe cases.
+Banned Ingredients: Wheat flour, spelt, durum, semolina, kamut, einkorn, barley, rye, and any products containing these ingredients.
+8. Soy:
+
+Description: Soy allergy triggers reactions to proteins in soybeans. Symptoms can range from mild skin irritation to anaphylaxis.
+Banned Ingredients: Soybeans, soy milk, tofu, tempeh, edamame, miso paste, soy sauce, lecithin (if derived from soy), and any products containing these ingredients.
+9. Sesame:
+
+Description: Sesame allergy is becoming increasingly common and can cause severe reactions similar to peanut allergies. Symptoms can include hives, swelling, wheezing, and anaphylaxis.
+Banned Ingredients: Sesame seeds, tahini, sesame oil, and any products containing these ingredients.
+10. Corn:
+
+Description: Corn allergy can involve reactions to the protein in corn kernels or corn syrup. Symptoms can range from mild skin reactions to anaphylaxis.
+Banned Ingredients: Corn kernels, corn flour, cornstarch, corn syrup, high-fructose corn syrup, and any products containing these ingredients.
+11. Mustard:
+
+Description: Mustard allergy can cause mild to severe reactions, including hives, swelling, and anaphylaxis.
+Banned Ingredients: Mustard seeds, mustard powder, Dijon mustard, yellow mustard, and any products containing these ingredients.
+12. Celery:
+
+Description: Celery allergy can trigger reactions similar to other food allergies, including skin reactions, swelling, and anaphylaxis.
+Banned Ingredients: Celery seeds, celery root (celeriac), celery stalks, and any products containing these ingredients.
 
 
 '''

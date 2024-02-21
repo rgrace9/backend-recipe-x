@@ -10,7 +10,13 @@ from app import app, client
 from extensions import db
 from constants import ingredients_list, ingredient_system_content
 
+testing = [
+    "Milk",
+    "Buttermilk",
+    "Heavy cream"
+]
 def fetch_ingredient_details(ingredient_name):
+    print(f"Fetching details for {ingredient_name} with OpenAI")
     response = client.chat.completions.create(
         model="gpt-3.5-turbo",
         messages=[
@@ -31,9 +37,10 @@ def fetch_ingredient_details(ingredient_name):
     )
     try:
     # Assuming the last message in 'choices' contains the ingredient details
-        details = response['choices'][-1]['message']['content']
+        details = response.choices[0].message.content
+        print('message', response.choices[0].message)
         ingredient_details = json.loads(details)
-        print(f"Details for {ingredient_name}: {ingredient_details}")
+        print(f"Successfully fetched details for {ingredient_name}: {ingredient_details}")
         return ingredient_details
     except Exception as e:
         print(f"Error processing ingredient {ingredient_name}: {e}")
@@ -101,12 +108,14 @@ def add_ingredient_with_details(ingredient_data):
 
     
 if __name__ == "__main__":
-    for ingredient_name in ingredients_list:
-        # ingredient_details = fetch_ingredient_details(ingredient_name)
-        print(f"Testing ingredient name {ingredient_name} works.")
+    for ingredient_name in testing:
+        print(f"Testing that ingredient name {ingredient_name} works.")
+        ingredient_details = fetch_ingredient_details(ingredient_name)
+        print(f"What OpenAI returned {ingredient_name}: {ingredient_details}")
+
         # Check if ingredient_details is not None before proceeding
         # if ingredient_details:
         #     add_ingredient_with_details(ingredient_details)
         # else:
         #     print(f"Skipping addition of {ingredient_name} due to an error in processing.")
-    print(f"Testing system messsage {ingredient_system_content} works.")
+    # print(f"Testing system messsage {ingredient_system_content} works.")
