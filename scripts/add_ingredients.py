@@ -113,9 +113,10 @@ if __name__ == "__main__":
         ingredient_details = fetch_ingredient_details(ingredient_name)
         print(f"What OpenAI returned {ingredient_name}: {ingredient_details}")
 
+        with app.app_context():
         # Check if ingredient_details is not None before proceeding
-        # if ingredient_details:
-        #     add_ingredient_with_details(ingredient_details)
-        # else:
-        #     print(f"Skipping addition of {ingredient_name} due to an error in processing.")
+            if ingredient_details:
+                add_ingredient_with_details(ingredient_details)
+            else:
+                print(f"Skipping addition of {ingredient_name} due to an error in processing.")
     # print(f"Testing system messsage {ingredient_system_content} works.")
