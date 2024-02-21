@@ -29,7 +29,7 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 migrate = Migrate(app, db)
 
-from models import IngredientCategory, Ingredient, Allergy, Diet, IngredientAllergy, IngredientDiet
+from models import IngredientCategory, Ingredient, Allergy, Diet, IngredientAllergy, RestrictedDietIngredient
 
 
 def extract_title_and_description(api_response_str):

@@ -4,4 +4,4 @@ from .ingredient import Ingredient
 from .allergy import Allergy
 from .diet import Diet
 from .ingredient_allergy import IngredientAllergy
-from .ingredient_diet import IngredientDiet
+from .restricted_diet_ingredient import RestrictedDietIngredient
