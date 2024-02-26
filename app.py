@@ -165,5 +165,64 @@ def recipe_ideas():
     recipes = fetch_random_recipes(updated_payloads)
     return jsonify(recipes) 
 
+
+
+def get_recipe(user_preferences):
+   # Construct the system message with instructions
+   system_message = {
+       "role": "system",
+       "content": recipe_generator_system_message
+   }
+
+
+   # Construct the user message with the provided preferences
+   user_message = {
+       "role": "user",
+       "content": user_preferences
+   }
+
+
+   # Create the chat messages array
+   messages = [system_message, user_message]
+
+
+   # Call the OpenAI API to get the chat completion
+   response = client.chat.completions.create(
+       model="gpt-3.5-turbo",
+       messages=messages,
+       temperature=1,
+       max_tokens=939,
+       top_p=1,
+       frequency_penalty=0.29,
+       presence_penalty=0.3
+   )
+
+
+   chat_message = response.choices[0].message.content
+   return chat_message
+
+
+@app.route('/recipe-generator', methods=['POST'])
+def recipe_generator():
+   try:
+       # Validate and parse the request JSON
+       user_preferences = request.get_json()
+       if not user_preferences:
+           return jsonify({"error": "Invalid request body"}), 400
+
+
+       # Call the function to generate recipe
+       recipe = get_recipe(user_preferences)
+       return jsonify(recipe)
+
+
+   except Exception as e:
+       return jsonify({"error": str(e)}), 500
+
+
+
+
+
+
 if __name__ == '__main__':
     app.run(debug=True)

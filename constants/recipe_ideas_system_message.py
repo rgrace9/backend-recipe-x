@@ -6,7 +6,7 @@ recipe_ideas_system_message = '''
     Each recipe must include the random ingredient
 
 
-    There is a variety of breakfast dish types to consider:
+    There is a variety of breakfast dish types to consider. First and foremost always respect the user's dietary restrictions and allergies. Here are some ideas to consider:
     - Breakfast casserole
     Egg-based Dishes:
 
@@ -177,4 +177,139 @@ Lobster Thermidor
 Duck à l'Orange
 Rack of Lamb
 Veal Marsala
+
+
+Snacks come in various forms and flavors, suitable for different tastes and occasions. First and foremost always respect the user's dietary restrictions and allergies. Here are some types of snacks:
+
+Chips and Crisps:
+
+Potato chips
+Tortilla chips
+Veggie chips
+Pita chips
+Corn chips
+Nuts and Seeds:
+
+Snack Meal Platters:
+
+Assorted cheeses, sliced fruits, nuts, olives, whole grain crackers, and granola bars
+Vegetable crudites with hummus, Greek yogurt dip, pita chips, cheese cubes, and energy bites
+Sliced deli meats, hard-boiled eggs, cherry tomatoes, cucumber slices, pretzel sticks, and granola bars
+On-the-Go Snack Packs:
+
+Trail mix with nuts, dried fruits, chocolate chips, and granola bar pieces
+Energy bite assortment with different flavors and a variety of nuts and seeds
+Mini granola bars paired with cheese sticks, apple slices, and baby carrots
+DIY Snack Plates:
+
+Whole grain toast points with almond butter, banana slices, and granola bar crumbles
+Rice cakes topped with cream cheese, cucumber slices, smoked salmon, and energy bites
+Mini whole wheat pita pockets filled with turkey, avocado, lettuce, and chopped energy bites
+Snack Skewers or Kabobs:
+
+Skewers with alternating grapes, cheese cubes, and pieces of granola bars
+Fruit kabobs with pineapple chunks, strawberries, and energy bites
+Caprese skewers with cherry tomatoes, mozzarella balls, basil leaves, and granola bar chunks
+Snack Wraps or Roll-Ups:
+
+Whole grain wraps filled with turkey, Swiss cheese, lettuce, tomato, and granola bar pieces
+Veggie wraps with hummus, shredded carrots, spinach leaves, and energy bites
+Chicken Caesar salad roll-ups with romaine lettuce, grilled chicken strips, Parmesan cheese, and a granola bar crumble
+
+
+Almonds
+Cashews
+Peanuts
+Walnuts
+Sunflower seeds
+Pumpkin seeds
+Dried Fruits:
+
+Raisins
+Apricots
+Banana chips
+Apple slices
+Cranberries
+Fresh Fruits:
+
+Apples
+Oranges
+Grapes
+Berries
+Pineapple chunks
+Watermelon slices
+Cheese and Crackers:
+
+Cheddar cheese cubes
+String cheese
+Crackers (plain, flavored, or whole grain)
+Cheese and cracker combos
+Popcorn:
+
+Plain popcorn
+Buttered popcorn
+Flavored popcorn (cheese, caramel, kettle corn)
+Dips and Spreads:
+
+Hummus
+Guacamole
+Salsa
+Spinach artichoke dip
+Peanut butter
+Nutella
+Yogurt and Cottage Cheese:
+
+Greek yogurt cups
+Yogurt-covered pretzels
+Cottage cheese with fruit
+Yogurt smoothies
+Granola Bars and Snack Bars:
+
+Chocolate chip granola bars
+Nut bars
+Fruit and nut bars
+Protein bars
+Sweet Treats:
+
+Cookies
+Brownies
+Chocolate bars
+Gummy candies
+Fruit leather
+Vegetable Snacks:
+
+Baby carrots
+Celery sticks
+Cucumber slices
+Cherry tomatoes
+Bell pepper strips
+Snap peas
+Energy Balls and Bites:
+
+Oatmeal energy balls
+Peanut butter energy bites
+Almond date balls
+No-bake protein bites
+Rice Cakes and Crackers:
+
+Plain rice cakes
+Multigrain rice cakes
+Rice crackers
+Seaweed snacks
+Pretzels:
+
+Salted pretzels
+Yogurt-covered pretzels
+Pretzel sticks
+Pretzel twists
+Frozen Snacks:
+
+Frozen grapes
+Frozen banana slices
+Frozen yogurt bites
+Frozen berries
+
+The random ingredient must be promimently featured in the recipe and must be in the recipe description
+
+do not include the diet name, allergy name, avoided ingredients in the title or description of the recipe
     '''
