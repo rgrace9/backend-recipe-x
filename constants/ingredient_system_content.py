@@ -50,8 +50,6 @@ These are the diet names and their IDs. Associate the ingredient with the diet i
   9 | pescatarian
  10 | dairy-free
  11 | whole30
- 12 | kosher
- 13 | halal
  14 | autoimmune protocol (aip)
  15 | raw food
 
@@ -62,13 +60,13 @@ Return only the object and no other text
  {"name": "All-purpose flour", "category_id": 3, "restricted_diet_ids": [3, 4, 5, 11], "allergy_ids": [7]}
 
 These are descriptions of each diet
-Vegan: Excludes all animal products, including meat, dairy, eggs, and often honey. It also avoids animal-derived substances.
+Vegan: Excludes all animal products, including meat, dairy, eggs, and honey. It also avoids animal-derived substances. Excludes dairy products like milk, cheese, yogurt, and butter.
 
-Vegetarian: Avoids meat, fish, and poultry. Some variations (like lacto-ovo vegetarians) allow dairy and eggs.
+Vegetarian: Avoids meat, fish, and poultry. allows dairy and eggs. Includes dairy products like milk, egg, cheese, yogurt, and butter.
 
-Paleo: Bans grains, legumes, processed foods, sugar, and most dairy. Focuses on what could have been hunted or gathered in the Paleolithic era.
+Paleo: Bans grains, legumes, processed foods, sugar, and most dairy. Focuses on what could have been hunted or gathered in the Paleolithic era. Excludes dairy products like milk, cheese, yogurt, and butter.
 
-Ketogenic: Severely restricts carbohydrates to force the body into a state of ketosis, where it burns fat for energy. High in fat and moderate in protein, it limits grains, sugar, fruits, and tubers.
+Ketogenic: Severely restricts carbohydrates to force the body into a state of ketosis, where it burns fat for energy. High in fat and moderate in protein, it limits grains, sugar, fruits, and tubers. It allows dairy to be consumed. Includes dairy products like milk, cheese, yogurt, and butter.
 
 Gluten-Free: Eliminates all foods containing gluten, which is found in wheat, barley, rye, and derivatives. Aimed at those with celiac disease or gluten sensitivity.
 
@@ -80,20 +78,16 @@ Mediterranean: Not highly restrictive, but emphasizes fruits, vegetables, whole 
 
 Pescatarian: Avoids meat and poultry but includes fish and seafood. May also include dairy and eggs, similar to a vegetarian diet but with fish.
 
-Dairy-Free: Excludes dairy products like milk, cheese, yogurt, and butter. Often adopted by those with lactose intolerance or dairy allergies.
+Dairy-Free: Excludes dairy products like milk, cheese, yogurt, and butter. Often adopted by those with lactose intolerance or dairy allergies. Excludes dairy products like milk, cheese, yogurt, and butter.
 
-Whole30: A 30-day diet that eliminates sugar, alcohol, grains, legumes, soy, and dairy. Focuses on whole foods, meats, nuts, and vegetables. It's meant to reset eating habits.
+Whole30: A diet that eliminates sugar, alcohol, grains, legumes, soy, and dairy. Focuses on whole foods, meats, nuts, and vegetables. Excludes dairy products like milk, cheese, yogurt, and butter. No dairy products. 
 
-Kosher: Follows Jewish dietary laws, banning pork and shellfish, and requiring meat and dairy to be consumed separately. Meat must be slaughtered and prepared according to specific rules.
-
-Halal: Adheres to Islamic law, prohibiting alcohol, pork, and any meats not slaughtered in the name of Allah. Halal foods must also be prepared with utensils that have not been contaminated with non-halal substances.
-
-Autoimmune Protocol (AIP): A stricter version of the paleo diet designed to reduce inflammation and symptoms of autoimmune diseases. It excludes nightshades (like tomatoes, eggplants, white, red, and russet potato varieties, all peppers, curry powder, chili powder, cayenne powder, red pepper, tomatillos, paprika, pimento, goji berries, Ashwagandha), nuts, seeds, eggs, dairy, grains, and legumes, coffee, alcohol, beans. 
+Autoimmune Protocol (AIP): A stricter version of the paleo diet designed to reduce inflammation and symptoms of autoimmune diseases. It excludes nightshades (like tomatoes, eggplants, white, red, and russet potato varieties, all peppers, curry powder, chili powder, cayenne powder, red pepper, tomatillos, paprika, pimento, goji berries, Ashwagandha), nuts, seeds, eggs, dairy, grains, and legumes, coffee, alcohol, beans. Excludes dairy products like milk, cheese, yogurt, and butter.
 
 NOT NIGHT SHADES:
 Black pepper is NOT a nightshade. Sweet potato is not a nightshade. Mushrooms are not nightshades. Onions are nightshades. Zucchini is not a nightshade.
 
-Raw Food: Consists of uncooked, unprocessed plant foods. Typically, food is not heated above 118 degrees Fahrenheit to preserve enzymes and nutrients. Excludes animal products, processed foods, and anything cooked above 115 degrees fahrenheit. A dehydrator can be used to cook things.
+Raw Food: Consists of uncooked, unprocessed plant foods. Typically, food is not heated above 115 degrees Fahrenheit to preserve enzymes and nutrients. Excludes animal products, processed foods, and anything cooked above 115 degrees fahrenheit. A dehydrator can be used to cook things. Excludes dairy products like milk, cheese, yogurt, and butter.
 
 
 Allergy Descriptions and Example Ingredient Bans:
@@ -147,4 +141,50 @@ Description: Celery allergy can trigger reactions similar to other food allergie
 Banned Ingredients: Celery seeds, celery root (celeriac), celery stalks, and any products containing these ingredients.
 
 
+Dairy refers to foods derived from the milk of mammals, most commonly cows, goats, and sheep.
+Common dairy products:
+
+Milk (whole, skim, low-fat, etc.)
+Cheese (hard, soft, aged, etc.)
+Yogurt (plain, flavored, Greek, etc.)
+Butter
+Ice cream
+Cream
+Sour cream
+
+Wheat is a cereal grain commonly used in breads, pastas, pastries, and other baked goods. It contains gluten, a protein that can be problematic for people with celiac disease or gluten sensitivity.
+Common wheat products:
+
+Bread (white, wheat, sourdough, etc.)
+Pasta (wheat, whole wheat, semolina)
+Cereals
+Cookies
+Cakes
+Crackers
+Pizza dough
+Breaded foods
+Bread crumbs
+
+Grains are the seeds of grasses, including wheat, rice, barley, oats, corn, and quinoa. They are a good source of carbohydrates, fiber, and other nutrients.
+
+Common grain products:
+
+Rice (white, brown, basmati, etc.)
+Barley
+Oats
+Quinoa
+Corn
+Couscous
+Bulgur wheat
+Popcorn
+
+
+If an ingredient has 'category_id': 4, then it must have at least 'restricted_diet_ids': [1, 3, 10, 11, 14, 15], 'allergy_ids': [3] at the very least.
+
+
+
+For every ingredient, include the category, diets, and allergies associated with it. If unsure, err on the side of including any possible allergies and diets the ingredient might be banned from. We would rather be overly cautious than not cautious enough.
+If there are  no diets associated with the ingredient, return an empty array restricted_diet_ids: []
+If there are no allergies associated with the ingredient, return an empty array allergy_ids: []
+Always associate the ingredient with a category. If the category is unknown, associate it with the category "other" with the id 11.
 '''

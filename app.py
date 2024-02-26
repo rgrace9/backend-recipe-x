@@ -11,6 +11,7 @@ from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import text
 from flask_migrate import Migrate
 from extensions import db
+from routes import allergy_bp, ingredient_bp, diet_bp
 
 load_dotenv()
 
@@ -31,6 +32,9 @@ migrate = Migrate(app, db)
 
 from models import IngredientCategory, Ingredient, Allergy, Diet, IngredientAllergy, RestrictedDietIngredient
 
+app.register_blueprint(allergy_bp)
+app.register_blueprint(ingredient_bp)
+app.register_blueprint(diet_bp)
 
 def extract_title_and_description(api_response_str):
     message_data = json.loads(api_response_str)
@@ -86,6 +90,9 @@ def generate_random_ingredients_payload(ingredients_array, user_payload):
         payloads.append(payload)
     
     return payloads
+
+
+
 
 
 @app.route('/recipe-ideas', methods=['POST'])
